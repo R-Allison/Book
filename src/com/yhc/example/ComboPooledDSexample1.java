@@ -15,9 +15,9 @@ public class ComboPooledDSexample1 {
 		// 设置连接数据库需要的配置信息
 		try {
 			cpds.setDriverClass("com.mysql.jdbc.Driver");
-			cpds.setJdbcUrl("jdbc:mysql://localhost:3306/test");
+			cpds.setJdbcUrl("jdbc:mysql://localhost:3306/bookstore");
 			cpds.setUser("root");
-			cpds.setPassword("root");
+			cpds.setPassword("123456");
 			// 设置连接池的参数
 			cpds.setInitialPoolSize(5);
 			cpds.setMaxPoolSize(15);

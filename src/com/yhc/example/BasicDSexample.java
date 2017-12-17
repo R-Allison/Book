@@ -13,9 +13,9 @@ public class BasicDSexample {
 		BasicDataSource bds = new BasicDataSource();
 		// 设置连接数据库需要的配置信息
 		bds.setDriverClassName("com.mysql.jdbc.Driver");
-		bds.setUrl("jdbc:mysql://localhost:3306/test");
+		bds.setUrl("jdbc:mysql://localhost:3306/bookstore");
 		bds.setUsername("root");
-		bds.setPassword("root");
+		bds.setPassword("123456");
 		// 设置连接池的参数
 		bds.setInitialSize(5);
 		bds.setMaxActive(5);

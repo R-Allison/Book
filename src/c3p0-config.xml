@@ -2,10 +2,10 @@
 <c3p0-config>
 	<default-config>
 		<property name="user">root</property>
-		<property name="password">0718</property>
+		<property name="password">123456</property>
 		<property name="driverClass">com.mysql.jdbc.Driver</property>
 		<property name="jdbcUrl">
-			jdbc:mysql://localhost:3306/testjavaweb
+			jdbc:mysql://localhost:3306/bookstore
 		</property>
 		<property name="checkoutTimeout">30000</property>
 		<property name="initialPoolSize">10</property>
@@ -19,9 +19,9 @@
 		<property name="maxPoolSize">15</property>
 		<property name="driverClass">com.mysql.jdbc.Driver</property>
 		<property name="jdbcUrl">
-			jdbc:mysql://localhost:3306/testjavaweb
+			jdbc:mysql://localhost:3306/bookstore
 		</property>
 		<property name="user">root</property>
-		<property name="password">0718</property>
+		<property name="password">123456</property>
 	</named-config>
 </c3p0-config>
