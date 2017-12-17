@@ -43,7 +43,7 @@
       <input type="text" name="name" id="name" value="">
       <br>
       <label for="password">密码*:</label>
-      <input type="password" name="" id="password" value="">
+      <input type="password" name="password" id="password" value="">
       <br>
       <label for="password">确认密码*:</label>
       <input type="password" name="rpassword" id="rpassword" value="">
