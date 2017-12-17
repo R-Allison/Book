@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 
 import com.yhc.DAO.BaseDao;
+import com.yhc.DAO.DBHelper;
 
 public class registerServlet extends HttpServlet {
 
@@ -29,14 +30,13 @@ public class registerServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
-		BaseDao baseDao = new BaseDao();
-		String sql="insert into user values(null,?,?,null,null,null,null,null,null,null,null)";
+		String sql="insert into user values(null,'"+request.getParameter("name")+"','"+request.getParameter("password")+"',null,null,null,null,null,null,null,null)";
 		System.out.println(request.getParameter("name"));
 		System.out.println(request.getParameter("password"));
 		try {
-			baseDao.update(sql,request.getParameter("name"),request.getParameter("password"));
+			DBHelper.update(sql);
 			response.sendRedirect("/BookStore/index.jsp");
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("/BookStore/register.jsp?error=1");
 		}
