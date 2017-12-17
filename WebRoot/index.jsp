@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      </li>
 		      <li>
 		        	<img src="images/201601151535480823_1000_220.jpg">
-		          <div class="am-slider-desc">新华文化创意产业园</div>
+		          <div class="am-slider-desc">XINlHUA</div>
 		      </li>
 		  </ul>
 		</div>
@@ -152,6 +152,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="assets/js/jquery.min.js"></script>
 <!--<![endif]-->
 <script src="assets/js/amazeui.min.js"></script>
-
 </body>
 </html>
