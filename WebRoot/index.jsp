@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <a href="#"><h1>BookStore</h1></a>
   </h1>
     <div class="am-topbar-right">
-      <a href=""><button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button></a>
+      <a href="login.jsp"><button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button></a>
       <a href="register.jsp"><button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">注册</button></a>
     </div>
   </div>
@@ -62,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <li><a href="#">科技</a></li>
   <li><a href="#">考试</a></li>
   <li><a href="#">生活百科</a></li>
-  <li><a href="#">所有商品</a></li>
+  <li><a href="#">所有书籍</a></li>
 </ul>
 </div>
 	<div class="am-u-sm-12">
@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      </li>
 		  </ul>
 		</div>
-		<div class="am-u-sm-4">
+		<div class="am-u-sm-5">
 			  <div data-am-widget="intro"
 			       class="am-intro am-cf am-intro-default"
 			       >
@@ -118,7 +118,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			            	</div>
 			  </div>
 		</div>
-		<div class="am-u-sm-8">
+		<div class="am-u-sm-7">
+		<h2>热门书籍</h2>
 		  <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
 		  am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
 		      

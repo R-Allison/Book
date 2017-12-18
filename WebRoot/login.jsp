@@ -43,16 +43,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <h3>登录</h3>
     <hr>
 
-    <form method="post" class="am-form">
+    <form method="post" class="am-form" action="${pageContext.request.contextPath}/servlet/loginServlet">
       <label>用户名:</label>
       <input type="text" name="name" id="name" value="">
       <br>
       <label for="password">密码:</label>
-      <input type="password" name="" id="password" value="">
+      <input type="password" name="password" id="password" value="">
       <br>
       <label for="remember-me">
         <input id="remember-me" type="checkbox">
-        记住密码
+        自动登陆（一周）
       </label>
       <br />
       <div class="am-cf">
