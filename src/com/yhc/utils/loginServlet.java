@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.yhc.bean.User;
 
 import com.yhc.DAO.UserDao;
 
@@ -30,9 +33,19 @@ public class loginServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		String password =new UserDao().findUsername(request.getParameter("name"));
-		System.out.println(password);
-		System.out.println(request.getParameter("password"));
+		String name = request.getParameter("name");
 		if(password.equals(request.getParameter("password"))){
+			User user = new User();
+			user.setName(name);
+			user.setPassword(password);
+			request.getSession().setAttribute("user", user);
+			String autoLogin = request.getParameter("autologin");
+			if(autoLogin != null){
+				Cookie cookie = new Cookie("autologin", name+"-"+password);
+				cookie.setMaxAge(Integer.parseInt(autoLogin));
+				cookie.setPath(request.getContextPath());
+				response.addCookie(cookie);
+			}
 			response.sendRedirect("/BookStore/index.jsp");
 		}else {
 			response.sendRedirect("/BookStore/login.jsp?error=1");

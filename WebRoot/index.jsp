@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -41,28 +42,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <h1 class="am-topbar-brand">
     <a href="#"><h1>BookStore</h1></a>
   </h1>
-    <div class="am-topbar-right">
-      <a href="login.jsp"><button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button></a>
-      <a href="register.jsp"><button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">注册</button></a>
-    </div>
+    <div class="am-topbar-right am-topbar-brand">
+      <c:choose>
+		<c:when test="${sessionScope.user == null}">
+			<a href="${pageContext.request.contextPath}/login.jsp">
+			<button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登陆</button>
+			</a>
+		</c:when>
+		<c:otherwise>
+			<a href="${pageContext.request.contextPath}/user.jsp"><i class='am-icon-user am-icon-fw'></i>个人中心</a>
+			<a href="${pageContext.request.contextPath}/login.jsp"><i class='am-icon-shopping-cart  am-icon-fw'></i><span>购物车</span><strong id='J_MiniCartNum' class='h'></strong></a>
+		</c:otherwise>
+	</c:choose>
+      </div>
   </div>
 </header>
 <div style="padding-left: 50px;">
 	<ul class="am-nav am-nav-pills">
-  <li><a href="#">文学</a></li>
-  <li><a href="#">生活</a></li>
-  <li><a href="#">计算机</a></li>
-  <li><a href="#">外语</a></li>
-  <li><a href="#">经营</a></li>
-  <li><a href="#">励志</a></li>
-  <li><a href="#">学术</a></li>
-  <li><a href="#">少儿</a></li>
-  <li><a href="#">艺术</a></li>
-  <li><a href="#">原版</a></li>
-  <li><a href="#">科技</a></li>
-  <li><a href="#">考试</a></li>
-  <li><a href="#">生活百科</a></li>
-  <li><a href="#">所有书籍</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=文学">文学</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=生活">生活</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=计算机">计算机</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=外语">外语</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=经营">经营</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=励志">励志</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=学术">学术</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=少儿">少儿</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=艺术">艺术</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=原版">原版</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=科技">科技</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=考试">考试</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=生活百科">生活百科</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=所有书籍">所有书籍</a></li>
 </ul>
 </div>
 	<div class="am-u-sm-12">
