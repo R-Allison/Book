@@ -1,3 +1,5 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="com.yhc.DAO.DBHelper"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
@@ -44,18 +46,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      </div>
 		  </div>
 		</header>
+		
 		<div class="am-cf am-padding am-padding-bottom-0">
         	<div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">类别</strong> / <small>${param.l}</small></div>
       	</div>
       	<hr>
 		<div class="am-u-sm-12">
 			<ul class=" am-avg-lg-6 am-gallery-default"  >
-		      <% for(int i = 0;i<20;i++){ %>
+		      <%	
+		      		String sql = "select * from products where category = '"+request.getParameter("l")+"'";
+		      		if(request.getParameter("l").equals("所有书籍")){
+		      			sql = "select * from products ";
+		      		}
+					ResultSet rs = DBHelper.query(sql);
+					while(rs.next()){
+				 %>
 		      <li>
 		        <div class="am-gallery-item">
-		            <a href="images/s29613638.jpg" class="">
-		              <img src="images/s29613638.jpg"  alt="终会走过这条遥远的道路" style="height: 213px; width: 159px; "/>
-		                <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
+		            <a href="<%=rs.getString("imgurl") %>" class="">
+		              <img src="<%=rs.getString("imgurl") %>" style="height: 213px; width: 159px; "/>
+		                <h3 class="am-gallery-title"><%=rs.getString("name") %></h3>
 		            </a>
 		        </div>
 		      </li>

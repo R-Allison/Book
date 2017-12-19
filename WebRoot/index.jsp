@@ -1,3 +1,5 @@
+<%@page import="com.yhc.DAO.DBHelper"%>
+<%@page import="java.sql.ResultSet"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
@@ -132,25 +134,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h2>热门书籍</h2>
 		  <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
 		  am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
-		      
+		      <%
+	      		String sql = "select * from products limit 4";
+				ResultSet rs = DBHelper.query(sql);
+				while(rs.next()){
+			%>
 		      <li>
 		        <div class="am-gallery-item">
 		            <a href="images/s29613638.jpg" class="">
-		              <img src="images/s29613638.jpg"  alt="终会走过这条遥远的道路"/>
-		                <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
+		              <img src="<%=rs.getString("imgurl") %>" style="height: 213px; width: 159px; " />
+		                <h3 class="am-gallery-title"><%=rs.getString("name") %></h3>
 		                <div class="am-gallery-desc">2375-09-26</div>
 		            </a>
 		        </div>
 		      </li>
-		      <li>
-		        <div class="am-gallery-item">
-		            <a href="images/s29613638.jpg" class="">
-		              <img src="images/s29613638.jpg"  alt="终会走过这条遥远的道路"/>
-		                <h3 class="am-gallery-title">终会走过这条遥远的道路</h3>
-		                <div class="am-gallery-desc">2375-09-26</div>
-		            </a>
-		        </div>
-		      </li>
+		      <%
+		      }
+		       %>
 		  </ul>
 	 </div>
 	</div>
