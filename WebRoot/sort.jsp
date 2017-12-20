@@ -46,13 +46,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      </div>
 		  </div>
 		</header>
-		
+		<div style="padding-left: 50px;">
+			<ul class="am-nav am-nav-pills">
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=文学">文学</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=生活">生活</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=计算机">计算机</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=外语">外语</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=经营">经营</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=励志">励志</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=学术">学术</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=少儿">少儿</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=艺术">艺术</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=原版">原版</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=科技">科技</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=考试">考试</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=生活百科">生活百科</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=所有书籍">所有书籍</a></li>
+		</ul>
+		</div>
 		<div class="am-cf am-padding am-padding-bottom-0">
         	<div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">类别</strong> / <small>${param.l}</small></div>
       	</div>
       	<hr>
 		<div class="am-u-sm-12">
-			<ul class=" am-avg-lg-6 am-gallery-default"  >
+			<ul data-am-widget="gallery" class="am-gallery am-avg-lg-5 am-gallery-default" data-am-gallery="{ pureview: true }" >
 		      <%	
 		      		String sql = "select * from products where category = '"+request.getParameter("l")+"'";
 		      		if(request.getParameter("l").equals("所有书籍")){
@@ -63,9 +80,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 %>
 		      <li>
 		        <div class="am-gallery-item">
-		            <a href="<%=rs.getString("imgurl") %>" class="">
-		              <img src="<%=rs.getString("imgurl") %>" style="height: 213px; width: 159px; "/>
-		                <h3 class="am-gallery-title"><%=rs.getString("name") %></h3>
+		            <a href="${pageContext.request.contextPath}/introduction.jsp?name=<%=rs.getString("name")%>&url=<%=rs.getString("imgurl")%>&author=<%=rs.getString("author")%>&pnum=<%=rs.getString("pnum")%>&price=<%=rs.getString("price")%>">
+		              <img src="<%=rs.getString("imgurl")%>" title="<%=rs.getString("description")%>" style="height: 213px; width: 159px; " />
+		                <h3 class="am-gallery-title"><%=rs.getString("name")%></h3>
+		                <div class="am-gallery-desc"><%=rs.getString("author")%></div>
 		            </a>
 		        </div>
 		      </li>

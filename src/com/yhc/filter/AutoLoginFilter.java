@@ -40,6 +40,7 @@ public class AutoLoginFilter implements Filter{
 			user.setName(name);
 			user.setPassword(password);
 			request.getSession().setAttribute("user", user);
+			request.getSession().setAttribute("name", name);
 		}
 		arg2.doFilter(req, arg1);
 		

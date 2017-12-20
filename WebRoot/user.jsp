@@ -1,3 +1,6 @@
+<%@page import="com.yhc.bean.User"%>
+<%@page import="com.yhc.DAO.DBHelper"%>
+<%@page import="java.sql.ResultSet"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
@@ -55,51 +58,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
           <!--占位-->
         </div>
-
+		<%
+		String sql = "select * from user where username = '"+request.getSession().getAttribute("name")+"'";
+		ResultSet rs = DBHelper.query(sql);
+		while(rs.next()){
+		 %>
         <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
           <form class="am-form am-form-horizontal">
             <div class="am-form-group">
               <label for="user-name" class="am-u-sm-3 am-form-label">姓名 / Name</label>
               <div class="am-u-sm-9">
-                <input type="text" id="user-name" placeholder="姓名 / Name">
-                <small>输入你的名字，让我们记住你。</small>
+                <input type="text" id="user-name"  placeholder="<%=rs.getString("username") %>">
               </div>
             </div>
 
             <div class="am-form-group">
               <label for="user-email" class="am-u-sm-3 am-form-label">电子邮件 / Email</label>
               <div class="am-u-sm-9">
-                <input type="email" id="user-email" placeholder="输入你的电子邮件 / Email">
-                <small>邮箱你懂得...</small>
+                <input type="email" id="user-email" placeholder="<%=rs.getString("email") %>">
               </div>
             </div>
 
             <div class="am-form-group">
               <label for="user-phone" class="am-u-sm-3 am-form-label">电话 / Telephone</label>
               <div class="am-u-sm-9">
-                <input type="tel" id="user-phone" placeholder="输入你的电话号码 / Telephone">
-              </div>
-            </div>
-
-            <div class="am-form-group">
-              <label for="user-QQ" class="am-u-sm-3 am-form-label">QQ</label>
-              <div class="am-u-sm-9">
-                <input type="number" pattern="[0-9]*" id="user-QQ" placeholder="输入你的QQ号码">
-              </div>
-            </div>
-
-            <div class="am-form-group">
-              <label for="user-weibo" class="am-u-sm-3 am-form-label">微博 / Twitter</label>
-              <div class="am-u-sm-9">
-                <input type="text" id="user-weibo" placeholder="输入你的微博 / Twitter">
+                <input type="tel" id="user-phone" placeholder="<%=rs.getString("teltphone") %>">
               </div>
             </div>
 
             <div class="am-form-group">
               <label for="user-intro" class="am-u-sm-3 am-form-label">简介 / Intro</label>
               <div class="am-u-sm-9">
-                <textarea class="" rows="5" id="user-intro" placeholder="输入个人简介"></textarea>
-                <small>250字以内写出你的一生...</small>
+                <textarea class="" rows="5" id="user-intro" placeholder="<%=rs.getString("introduce") %>"></textarea>
+              
               </div>
             </div>
 
@@ -110,6 +101,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
           </form>
         </div>
+        <%
+        }
+         %>
       </div>
     </div>
 

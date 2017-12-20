@@ -39,6 +39,7 @@ public class loginServlet extends HttpServlet {
 			user.setName(name);
 			user.setPassword(password);
 			request.getSession().setAttribute("user", user);
+			request.getSession().setAttribute("name", name);
 			String autoLogin = request.getParameter("autologin");
 			if(autoLogin != null){
 				Cookie cookie = new Cookie("autologin", name+"-"+password);

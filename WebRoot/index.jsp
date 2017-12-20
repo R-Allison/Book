@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <link rel="stylesheet" href="assets/css/amazeui.min.css">
   <link rel="stylesheet" href="assets/css/app.css">
 </head>
-<body>
+<body style="overflow:auto;">
 <header class="am-topbar" style="font-size: 20px;">
   <h1 class="am-topbar-brand">
     <a href="#"><h1>BookStore</h1></a>
@@ -141,10 +141,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			%>
 		      <li>
 		        <div class="am-gallery-item">
-		            <a href="images/s29613638.jpg" class="">
-		              <img src="<%=rs.getString("imgurl") %>" style="height: 213px; width: 159px; " />
+		            <a href="${pageContext.request.contextPath}/introduction.jsp?name=<%=rs.getString("name") %>&url=<%=rs.getString("imgurl")%>&author=<%=rs.getString("author") %>&pnum=<%=rs.getString("pnum")%>&price=<%=rs.getString("price")%>" class="">
+		              <img src="<%=rs.getString("imgurl") %>" title="<%=rs.getString("description") %>" style="height: 213px; width: 159px; " />
 		                <h3 class="am-gallery-title"><%=rs.getString("name") %></h3>
-		                <div class="am-gallery-desc">2375-09-26</div>
+		                <div class="am-gallery-desc"><%=rs.getString("author") %></div>
 		            </a>
 		        </div>
 		      </li>
