@@ -1,5 +1,7 @@
 <%@page import="com.yhc.DAO.DBHelper"%>
 <%@page import="java.sql.ResultSet"%>
+<%@page  language="java" import="java.sql.SQLException,com.yhc.DAO.ShoppingDao,com.yhc.bean.*"%>
+
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
@@ -39,7 +41,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <link rel="stylesheet" href="assets/css/amazeui.min.css">
   <link rel="stylesheet" href="assets/css/app.css">
 </head>
-<body>
+<body style="overflow:auto;">
+<%
+
+ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+ShoppingDao shoppingDao;
+Products book;
+//如果没有购物车，就创建新的购物车
+if(cart==null){
+	cart=new ShoppingCart();
+	session.setAttribute("cart", cart);
+}
+//加入购物车的信息
+String bookId = request.getParameter("bookId");
+if(bookId!=null){
+	try{
+	shoppingDao = new ShoppingDao();
+	book = shoppingDao.getBookDetails(bookId);
+	cart.add(bookId, book);//存进购物车
+	}catch(SQLException e){
+		e.printStackTrace();
+	}
+}
+ %>
 <header class="am-topbar" style="font-size: 20px;">
   <h1 class="am-topbar-brand">
     <a href="#"><h1>BookStore</h1></a>
@@ -141,10 +165,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			%>
 		      <li>
 		        <div class="am-gallery-item">
-		            <a href="images/s29613638.jpg" class="">
-		              <img src="<%=rs.getString("imgurl") %>" style="height: 213px; width: 159px; " />
+		            <a href="${pageContext.request.contextPath}/introduction.jsp?id=<%=rs.getString("id") %>&name=<%=rs.getString("name") %>&url=<%=rs.getString("imgurl")%>&author=<%=rs.getString("author") %>&pnum=<%=rs.getString("pnum")%>&price=<%=rs.getString("price")%>" class="">
+		              <img src="<%=rs.getString("imgurl") %>" title="<%=rs.getString("description") %>" style="height: 213px; width: 159px; " />
 		                <h3 class="am-gallery-title"><%=rs.getString("name") %></h3>
-		                <div class="am-gallery-desc">2375-09-26</div>
+		                <div class="am-gallery-desc"><%=rs.getString("author") %></div>
 		            </a>
 		        </div>
 		      </li>
@@ -153,7 +177,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		       %>
 		  </ul>
 	 </div>
+	 <a href="${pageContext.request.contextPath}/shoppingcart.jsp">查看购物车</a>
 	</div>
+	
 <footer class="am-margin-top">
   <hr/>
   <p class="am-text-center">
