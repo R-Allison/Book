@@ -40,8 +40,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</a>
 		</c:when>
 		<c:otherwise>
-			<a href="#"><i class='am-icon-user am-icon-fw'></i>个人中心</a>
-			<a href="#"><i class='am-icon-shopping-cart  am-icon-fw'></i><span>购物车</span><strong id='J_MiniCartNum' class='h'></strong></a>
+			<a href="${pageContext.request.contextPath}/user.jsp"><i class='am-icon-user am-icon-fw'></i>个人中心</a>
+			<a href="${pageContext.request.contextPath}/login.jsp"><i class='am-icon-shopping-cart  am-icon-fw'></i><span>购物车</span><strong id='J_MiniCartNum' class='h'></strong></a>
 		</c:otherwise>
 	</c:choose>
       </div>
@@ -64,39 +64,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		while(rs.next()){
 		 %>
         <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-          <form class="am-form am-form-horizontal">
+          <form class="am-form am-form-horizontal" action="${pageContext.request.contextPath}/servlet/SaveInfoServlet">
             <div class="am-form-group">
               <label for="user-name" class="am-u-sm-3 am-form-label">姓名 / Name</label>
               <div class="am-u-sm-9">
-                <input type="text" id="user-name"  placeholder="<%=rs.getString("username") %>">
+              	<input type="hidden" name="id" value="<%=rs.getString("id") %>" >
+                <input type="text" id="user-name" name="name"  placeholder="<%=rs.getString("username") %>">
               </div>
             </div>
 
             <div class="am-form-group">
               <label for="user-email" class="am-u-sm-3 am-form-label">电子邮件 / Email</label>
               <div class="am-u-sm-9">
-                <input type="email" id="user-email" placeholder="<%=rs.getString("email") %>">
+                <input type="email" id="user-email" name="email" placeholder="<%=rs.getString("email") %>">
               </div>
             </div>
 
             <div class="am-form-group">
               <label for="user-phone" class="am-u-sm-3 am-form-label">电话 / Telephone</label>
               <div class="am-u-sm-9">
-                <input type="tel" id="user-phone" placeholder="<%=rs.getString("teltphone") %>">
+                <input type="tel" id="user-phone" name="tel" placeholder="<%=rs.getString("teltphone") %>">
               </div>
             </div>
 
-            <div class="am-form-group">
-              <label for="user-intro" class="am-u-sm-3 am-form-label">简介 / Intro</label>
-              <div class="am-u-sm-9">
-                <textarea class="" rows="5" id="user-intro" placeholder="<%=rs.getString("introduce") %>"></textarea>
-              
-              </div>
-            </div>
 
             <div class="am-form-group">
               <div class="am-u-sm-9 am-u-sm-push-3">
-                <button type="button" class="am-btn am-btn-primary">保存修改</button>
+                <input type="submit" class="am-btn am-btn-primary" value="保存修改" />
               </div>
             </div>
           </form>
@@ -106,7 +100,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          %>
       </div>
     </div>
-
+	<a href="${pageContext.request.contextPath}/servlet/LogoutServlet">
+	<button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">注销</button>
+	</a>
 
     <footer class="admin-content-footer">
       <hr>

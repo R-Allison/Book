@@ -1,5 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 解决乱码问题   -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:requestEncoding value="utf-8"/>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -67,7 +70,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <hr>
     <div class="am-u-sm-12">
-    
+
+
 		        <div class="am-gallery-item am-u-sm-2">
 		        <img src='<%=request.getParameter("url") %>' style="height: 213px; width: 159px; ">
 		        </div>
@@ -76,9 +80,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="am-gallery-desc"><%=request.getParameter("author") %></div>
 					<div class="am-gallery-desc">价格：<%=request.getParameter("price") %></div>
 					<div class="am-gallery-desc">库存：<%=request.getParameter("pnum") %></div>
-					<button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">加入购物车</button>
-				</div>
-		        	
+					<!-- <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">加入购物车</button> -->
+					<!-- 加入购物车的调试 -->
+					<a href="${pageContext.request.contextPath}/index.jsp?bookId=<%=request.getParameter("id")%>">加入购物车</a>
+				</div>	
 	
 	</div>
   </body>

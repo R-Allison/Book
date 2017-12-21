@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     <meta charset="utf-8">
 	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	  <title>book</title>
+	  <title>查询结果</title>
 	  <meta name="description" content=" user 页面">
 	  <meta name="keywords" content="user">
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,18 +63,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=生活百科">生活百科</a></li>
 		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=所有书籍">所有书籍</a></li>
 		</ul>
+		
 		</div>
+		
 		<div class="am-cf am-padding am-padding-bottom-0">
-        	<div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">类别</strong> / <small>${param.l}</small></div>
+        	<div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">查询结果</strong> / <small>${param.select}</small></div>
       	</div>
       	<hr>
 		<div class="am-u-sm-12">
 			<ul data-am-widget="gallery" class="am-gallery am-avg-lg-5 am-gallery-default" data-am-gallery="{ pureview: true }" >
 		      <%	
-		      		String sql = "select * from products where category = '"+request.getParameter("l")+"'";
-		      		if(request.getParameter("l").equals("所有书籍")){
-		      			sql = "select * from products ";
-		      		}
+		      		String sql = "select * from products where name like('%"+request.getParameter("select")+"%')";
 					ResultSet rs = DBHelper.query(sql);
 					while(rs.next()){
 				 %>

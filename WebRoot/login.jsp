@@ -50,10 +50,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label for="password">密码:</label>
       <input type="password" name="password" id="password" value="">
       <br>
-      <label for="remember-me">
+     <!-- <label for="remember-me">
         <input name="autologin" value="${60*60*24*7}" id="remember-me" type="checkbox">
         自动登陆（一周）
-      </label>
+      </label> -->
       <br />
       <div class="am-cf">
         <input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">

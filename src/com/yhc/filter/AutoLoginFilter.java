@@ -43,7 +43,6 @@ public class AutoLoginFilter implements Filter{
 			request.getSession().setAttribute("name", name);
 		}
 		arg2.doFilter(req, arg1);
-		
 	}
 
 	@Override
