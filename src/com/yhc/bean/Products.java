@@ -30,7 +30,6 @@ public class Products {
 		this.id=id;
 		this.name=name;
 		this.author=author;
-
 		this.price=price;
 		this.category=category;
 		this.pnum=pnum;
