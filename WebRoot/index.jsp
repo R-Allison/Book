@@ -177,7 +177,7 @@ if(bookId!=null){
 		       %>
 		  </ul>
 	 </div>
-	 <a href="${pageContext.request.contextPath}/home/shoppingcart.jsp">查看购物车</a>
+	 <a href="${pageContext.request.contextPath}/shoppingcart.jsp">查看购物车</a>
 	</div>
 	
 <footer class="am-margin-top">

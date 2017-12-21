@@ -14,6 +14,7 @@ public class Products {
 	
 	private String id;           //商品ID
 	private String name;         //商品名
+	private String author;       //作者
 	private Double price;        //价格
 	private String category;     //分类
 	private int pnum;            //库存
@@ -25,9 +26,10 @@ public class Products {
 		
 	}
 	//自定义的构造方法
-	public Products(String id,String name,Double price,String category,int pnum,String imgurl,String description){
+	public Products(String id,String name,String author,Double price,String category,int pnum,String imgurl,String description){
 		this.id=id;
 		this.name=name;
+		this.author=author;
 		this.price=price;
 		this.category=category;
 		this.pnum=pnum;
@@ -37,7 +39,12 @@ public class Products {
 		
 	}
 	
-	
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 	public String getId() {
 		return id;
 	}
