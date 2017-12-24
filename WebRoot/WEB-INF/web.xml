@@ -27,8 +27,19 @@
     <servlet-name>SaveInfoServlet</servlet-name>
     <servlet-class>com.yhc.servlet.SaveInfoServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AddCartServlet</servlet-name>
+    <servlet-class>com.yhc.servlet.AddCartServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PageServlet</servlet-name>
+    <servlet-class>com.yhc.servlet.PageServlet</servlet-class>
+  </servlet>
 
-  
 
 
   <servlet-mapping>
@@ -47,6 +58,14 @@
   <servlet-mapping>
     <servlet-name>SaveInfoServlet</servlet-name>
     <url-pattern>/servlet/SaveInfoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddCartServlet</servlet-name>
+    <url-pattern>/servlet/AddCartServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PageServlet</servlet-name>
+    <url-pattern>/servlet/PageServlet</url-pattern>
   </servlet-mapping>
   
   <filter>

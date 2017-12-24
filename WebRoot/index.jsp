@@ -42,28 +42,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <link rel="stylesheet" href="assets/css/app.css">
 </head>
 <body style="overflow:auto;">
-<%
-
-ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
-ShoppingDao shoppingDao;
-Products book;
-//如果没有购物车，就创建新的购物车
-if(cart==null){
-	cart=new ShoppingCart();
-	session.setAttribute("cart", cart);
-}
-//加入购物车的信息
-String bookId = request.getParameter("bookId");
-if(bookId!=null){
-	try{
-	shoppingDao = new ShoppingDao();
-	book = shoppingDao.getBookDetails(bookId);
-	cart.add(bookId, book);//存进购物车
-	}catch(SQLException e){
-		e.printStackTrace();
-	}
-}
- %>
 <header class="am-topbar" style="font-size: 20px;">
   <h1 class="am-topbar-brand">
     <a href="#"><h1>BookStore</h1></a>
@@ -78,7 +56,7 @@ if(bookId!=null){
 		</c:when>
 		<c:otherwise>
 			<a href="${pageContext.request.contextPath}/user.jsp"><i class='am-icon-user am-icon-fw'></i>个人中心</a>
-			<a href="${pageContext.request.contextPath}/login.jsp"><i class='am-icon-shopping-cart  am-icon-fw'></i><span>购物车</span><strong id='J_MiniCartNum' class='h'></strong></a>
+			<a href="${pageContext.request.contextPath}/shoppingcart.jsp"><i class='am-icon-shopping-cart  am-icon-fw'></i><span>购物车</span><strong id='J_MiniCartNum' class='h'></strong></a>
 		</c:otherwise>
 	</c:choose>
       </div>
@@ -99,7 +77,7 @@ if(bookId!=null){
   <li><a href="${pageContext.request.contextPath}/sort.jsp?l=科技">科技</a></li>
   <li><a href="${pageContext.request.contextPath}/sort.jsp?l=考试">考试</a></li>
   <li><a href="${pageContext.request.contextPath}/sort.jsp?l=生活百科">生活百科</a></li>
-  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=所有书籍">所有书籍</a></li>
+  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=所有书籍&Num=1">所有书籍</a></li>
 </ul>
 	<form class="am-topbar-form am-topbar-left am-form-inline" role="search" action="${pageContext.request.contextPath}/select.jsp">
      <div class="am-form-group">

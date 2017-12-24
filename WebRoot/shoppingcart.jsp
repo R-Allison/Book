@@ -1,5 +1,6 @@
 <%@page import="com.yhc.bean.ShoppingCart"%>
 <%@ page language="java" import="java.util.*,java.sql.SQLException,com.yhc.DAO.ShoppingDao,com.yhc.bean.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -10,9 +11,43 @@
 		<link href="assets/css/demo.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/cartstyle.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/optstyle.css" rel="stylesheet" type="text/css" />
+		 <link rel="icon" type="image/png" href="assets/i/favicon.png">
+	  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+	  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+	  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/app.css">
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 	</head>
-	<body>
+  <body style="overflow:auto;">
+    <header class="am-topbar" style="font-size: 20px;">
+	  <h1 class="am-topbar-brand">
+	    <a href="index.jsp"><h1>BookStore</h1></a>
+	  </h1>
+	    <div class="am-topbar-right am-topbar-brand">
+				<a href="${pageContext.request.contextPath}/user.jsp"><i class='am-icon-user am-icon-fw'></i>个人中心</a>
+				<%-- <a href="${pageContext.request.contextPath}/shoppingcart.jsp"><i class='am-icon-shopping-cart  am-icon-fw'></i><span>购物车</span><strong id='J_MiniCartNum' class='h'></strong></a> --%>
+	      </div>
+	  </div>
+	</header>
+	<div style="padding-left: 50px;">
+		<ul class="am-nav am-nav-pills">
+		<li><a href="${pageContext.request.contextPath}/index.jsp">首页</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=文学">文学</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=生活">生活</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=计算机">计算机</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=外语">外语</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=经营">经营</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=励志">励志</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=学术">学术</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=少儿">少儿</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=艺术">艺术</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=原版">原版</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=科技">科技</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=考试">考试</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=生活百科">生活百科</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=所有书籍&Num=1">所有书籍</a></li>
+	</ul>
+	</div>
 	<div>
 <%                                                  
 ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
@@ -43,7 +78,6 @@ if(num>0){
 %>
 <div class="clear"></div>
 			<div class="clear"></div>		
-			购物车
 			<div class="concent" style="">
 				<div id="cartTable">
 					<div class="cart-table-th">
@@ -153,7 +187,7 @@ bd=(Products)item.getItem();
 				<div class="float-bar-wrapper">
 					<div id="J_SelectAll2" class="select-all J_SelectAll">
 						<div class="cart-checkbox">
-							<input class="check-all check" id="J_SelectAllCbx2" name="select-all" value="true" type="checkbox">
+							
 							<label for="J_SelectAllCbx2"></label>
 						</div>
 					</div>
