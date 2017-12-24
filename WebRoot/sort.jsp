@@ -1,3 +1,5 @@
+<%@page import="com.yhc.DAO.PageDao"%>
+<%@page import="com.yhc.bean.Products"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.yhc.DAO.DBHelper"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
@@ -40,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</c:when>
 				<c:otherwise>
 					<a href="${pageContext.request.contextPath}/user.jsp"><i class='am-icon-user am-icon-fw'></i>个人中心</a>
-					<a href="${pageContext.request.contextPath}/login.jsp"><i class='am-icon-shopping-cart  am-icon-fw'></i><span>购物车</span><strong id='J_MiniCartNum' class='h'></strong></a>
+					<a href="${pageContext.request.contextPath}/shoppingcart.jsp"><i class='am-icon-shopping-cart  am-icon-fw'></i><span>购物车</span><strong id='J_MiniCartNum' class='h'></strong></a>
 				</c:otherwise>
 			</c:choose>
 		      </div>
@@ -61,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=科技">科技</a></li>
 		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=考试">考试</a></li>
 		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=生活百科">生活百科</a></li>
-		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=所有书籍">所有书籍</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=所有书籍&Num=1">所有书籍</a></li>
 		</ul>
 		</div>
 		<div class="am-cf am-padding am-padding-bottom-0">
@@ -71,16 +73,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="am-u-sm-12">
 			<ul data-am-widget="gallery" class="am-gallery am-avg-lg-5 am-gallery-default" data-am-gallery="{ pureview: true }" >
 		      <%	
-		      		String sql = "select * from products where category = '"+request.getParameter("l")+"'";
-		      		if(request.getParameter("l").equals("所有书籍")){
-		      			sql = "select * from products ";
-		      		}
+		      	if(request.getParameter("l").equals("所有书籍")){
+		      	  PageDao pageDao = new PageDao();
+				  List<Products> list = pageDao.findAllProducts();
+				  int totalRecord = list.size();
+				  int s = 0;
+				  int Num = Integer.parseInt(request.getParameter("Num"));
+				  System.out.print(list.get(1));
+				  if(totalRecord%5==0){
+			            s = totalRecord / 5;
+			        }else{
+			            s = totalRecord / 5 +1;
+			        }
+			        String sql = "select * from products limit 0,5";
+			        for(int i=0;i <=Num; i++){
+			        	if(i == Num){
+			        		int j = 0 + (i-1)*5;
+			        		sql = "select * from products limit "+j+",5";
+			        	}
+			        }
 					ResultSet rs = DBHelper.query(sql);
 					while(rs.next()){
 				 %>
 		      <li>
 		        <div class="am-gallery-item">
-		            <a href="${pageContext.request.contextPath}/introduction.jsp?name=<%=rs.getString("name")%>&url=<%=rs.getString("imgurl")%>&author=<%=rs.getString("author")%>&pnum=<%=rs.getString("pnum")%>&price=<%=rs.getString("price")%>">
+		            <a href="${pageContext.request.contextPath}/introduction.jsp?id=<%=rs.getString("id") %>&name=<%=rs.getString("name")%>&url=<%=rs.getString("imgurl")%>&author=<%=rs.getString("author")%>&pnum=<%=rs.getString("pnum")%>&price=<%=rs.getString("price")%>">
 		              <img src="<%=rs.getString("imgurl")%>" title="<%=rs.getString("description")%>" style="height: 213px; width: 159px; " />
 		                <h3 class="am-gallery-title"><%=rs.getString("name")%></h3>
 		                <div class="am-gallery-desc"><%=rs.getString("author")%></div>
@@ -89,6 +106,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      </li>
 		      <%} %>
 		  </ul>
+		  <ul class="am-pagination am-pagination-centered">
+			  <%
+			  
+			  for(int i = 1; i<s+1; i++){ 
+			  	if(i == Integer.parseInt(request.getParameter("Num"))){
+			  	%>
+			  	<li class="am-active"><a href="${pageContext.request.contextPath}/servlet/PageServlet?l=<%=request.getParameter("l")%>&Num=<%=i %>"><%=i %></a></li>
+			 <% }else{
+			  %>
+			  	<li><a href="${pageContext.request.contextPath}/servlet/PageServlet?l=<%=request.getParameter("l")%>&Num=<%=i %>"><%=i %></a></li>
+			  <%
+			  }
+			  
+			  }
+			  %>
+			  
+			</ul>
+			<%
+			}
+			else{
+		      		String sql = "select * from products where category = '"+request.getParameter("l")+"'";
+					ResultSet rs = DBHelper.query(sql);
+					while(rs.next()){
+				 %>
+		      <li>
+		        <div class="am-gallery-item">
+		            <a href="${pageContext.request.contextPath}/introduction.jsp?id=<%=rs.getString("id") %>&name=<%=rs.getString("name")%>&url=<%=rs.getString("imgurl")%>&author=<%=rs.getString("author")%>&pnum=<%=rs.getString("pnum")%>&price=<%=rs.getString("price")%>">
+		              <img src="<%=rs.getString("imgurl")%>" title="<%=rs.getString("description")%>" style="height: 213px; width: 159px; " />
+		                <h3 class="am-gallery-title"><%=rs.getString("name")%></h3>
+		                <div class="am-gallery-desc"><%=rs.getString("author")%></div>
+		            </a>
+		        </div>
+		      </li>
+		      <%} %>
+		  </ul>
+			<%} %>
 		</div>
+		
+		
   </body>
 </html>

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.yhc.DAO.*,com.yhc.bean.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 解决乱码问题   -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body style="overflow:auto;">
     <header class="am-topbar" style="font-size: 20px;">
 	  <h1 class="am-topbar-brand">
-	    <a href="#"><h1>BookStore</h1></a>
+	    <a href="index.jsp"><h1>BookStore</h1></a>
 	  </h1>
 	    <div class="am-topbar-right am-topbar-brand">
 	      <c:choose>
@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</c:when>
 			<c:otherwise>
 				<a href="${pageContext.request.contextPath}/user.jsp"><i class='am-icon-user am-icon-fw'></i>个人中心</a>
-				<a href="${pageContext.request.contextPath}/login.jsp"><i class='am-icon-shopping-cart  am-icon-fw'></i><span>购物车</span><strong id='J_MiniCartNum' class='h'></strong></a>
+				<a href="${pageContext.request.contextPath}/shoppingcart.jsp"><i class='am-icon-shopping-cart  am-icon-fw'></i><span>购物车</span><strong id='J_MiniCartNum' class='h'></strong></a>
 			</c:otherwise>
 		</c:choose>
 	      </div>
@@ -49,6 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</header>
 	<div style="padding-left: 50px;">
 		<ul class="am-nav am-nav-pills">
+		<li><a href="${pageContext.request.contextPath}/index.jsp">首页</a></li>
 	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=文学">文学</a></li>
 	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=生活">生活</a></li>
 	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=计算机">计算机</a></li>
@@ -62,27 +63,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=科技">科技</a></li>
 	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=考试">考试</a></li>
 	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=生活百科">生活百科</a></li>
-	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=所有书籍">所有书籍</a></li>
+	  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=所有书籍&Num=1">所有书籍</a></li>
 	</ul>
 	</div>
+	<%
+
+	if(request.getParameter("msg")=="1"){
+	 %>
+	 <script>alter('添加成功！我在购物车等着你哟~');</script>
+	 			<%
+	 			}
+ 				String id = request.getParameter("id");
+ 				ShoppingDao s = new ShoppingDao();
+ 				Products p = s.getBookDetails(id);			
+ 			 %>
 	<div class="am-cf am-padding am-padding-bottom-0">
-       	<div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">图书</strong> / <small><%=request.getParameter("name") %></small></div>
+       	<div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">图书</strong> / <small><%=p.getCategory() %></small></div>
     </div>
     <hr>
     <div class="am-u-sm-12">
 
 
 		        <div class="am-gallery-item am-u-sm-2">
-		        <img src='<%=request.getParameter("url") %>' style="height: 213px; width: 159px; ">
+		        <img src='<%=p.getImgurl()%>' style="height: 213px; width: 159px; ">
 		        </div>
 		        <div class="am-u-sm-10">
-					<h3 class="am-gallery-title"><%=request.getParameter("name") %></h3>
-					<div class="am-gallery-desc"><%=request.getParameter("author") %></div>
-					<div class="am-gallery-desc">价格：<%=request.getParameter("price") %></div>
-					<div class="am-gallery-desc">库存：<%=request.getParameter("pnum") %></div>
+					<h3 class="am-gallery-title"><%=p.getName() %></h3>
+					<div class="am-gallery-desc"><%=p.getAuthor()%></div>
+					<div class="am-gallery-desc">价格：<%=p.getPrice()%></div>
+					<div class="am-gallery-desc">库存：<%=p.getPnum()%></div>
 					<!-- <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">加入购物车</button> -->
 					<!-- 加入购物车的调试 -->
-					<a href="${pageContext.request.contextPath}/index.jsp?bookId=<%=request.getParameter("id")%>">加入购物车</a>
+					<a href="${pageContext.request.contextPath}/servlet/AddCartServlet?bookId=<%=p.getId()%>">加入购物车</a>
 				</div>	
 	
 	</div>

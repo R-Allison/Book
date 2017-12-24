@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=科技">科技</a></li>
 		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=考试">考试</a></li>
 		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=生活百科">生活百科</a></li>
-		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=所有书籍">所有书籍</a></li>
+		  <li><a href="${pageContext.request.contextPath}/sort.jsp?l=所有书籍&Num=1">所有书籍</a></li>
 		</ul>
 		
 		</div>

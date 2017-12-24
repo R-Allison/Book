@@ -30,28 +30,33 @@ public class loginServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html");
+		response.setContentType("text/html,charset=utf-8");
 		PrintWriter out = response.getWriter();
 		String password =new UserDao().findUsername(request.getParameter("name"));
 		String name = request.getParameter("name");
-		if(password.equals(request.getParameter("password"))){
-			User user = new User();
-			user.setName(name);
-			user.setPassword(password);
-			request.getSession().setAttribute("user", user);
-			request.getSession().setAttribute("name", name);
-			String autoLogin = request.getParameter("autologin");
-			if(autoLogin != null){
-				Cookie cookie = new Cookie("autologin", name+"-"+password);
-				cookie.setMaxAge(Integer.parseInt(autoLogin));
-				cookie.setPath(request.getContextPath());
-				response.addCookie(cookie);
+		if(password == null){
+			response.sendRedirect("/BookStore/login.jsp?error=sql");
+		}else{
+			if(password.equals(request.getParameter("password"))){
+				User user = new User();
+				user.setName(name);
+				user.setPassword(password);
+				request.getSession().setAttribute("user", user);
+				request.getSession().setAttribute("name", name);
+				String autoLogin = request.getParameter("autologin");
+				System.out.println(autoLogin);
+				if(autoLogin != null){
+					Cookie cookie = new Cookie("autologin", name+"-"+password);
+					cookie.setMaxAge(Integer.parseInt(autoLogin));
+					cookie.setPath(request.getContextPath());
+					response.addCookie(cookie);
+				}
+				response.sendRedirect("/BookStore/index.jsp");
+			}else {
+				response.sendRedirect("/BookStore/login.jsp?error=1");
 			}
-			response.sendRedirect("/BookStore/index.jsp");
-		}else {
-			response.sendRedirect("/BookStore/login.jsp?error=1");
 		}
-		out.println("");
+		
 		out.flush();
 		out.close();
 	}

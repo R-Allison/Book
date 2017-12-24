@@ -2,27 +2,29 @@ package com.yhc.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.yhc.DAO.DBHelper;
+import com.yhc.bean.PageBean;
+import com.yhc.utils.PageService;
 
 /** 
- * @ClassName:     SaveInfoServlet 
- * @Description:TODO(保存个人信息) 
+ * @ClassName:     PageServlet 
+ * @Description:TODO(做分页使用) 
  * @author:    zhou-jx
- * @date:        2017年12月24日 上午8:41:35 
+ * @date:        2017年12月24日 上午9:50:26 
  *  
  */
-public class SaveInfoServlet extends HttpServlet {
+public class PageServlet extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public SaveInfoServlet() {
+	public PageServlet() {
 		super();
 	}
 
@@ -30,7 +32,8 @@ public class SaveInfoServlet extends HttpServlet {
 	 * Destruction of the servlet. <br>
 	 */
 	public void destroy() {
-		super.destroy(); 
+		super.destroy(); // Just puts "destroy" string in log
+		// Put your code here
 	}
 
 	/**
@@ -47,23 +50,16 @@ public class SaveInfoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
-//		PrintWriter out = response.getWriter();
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String tel = request.getParameter("tel");
-		if(name.length() != 0){
-			DBHelper.update("update user set username = '"+name+"' where id = "+request.getParameter("id"));
-			request.getSession().setAttribute("name", name);
+		int pageNum = Integer.parseInt(request.getParameter("Num"));
+		int next = pageNum;
+		PageService page = new PageService();
+		try {
+			PageBean pb = page.findAllProductWithPage(pageNum, 5);
+			request.setAttribute("pageBean", pb);
+			response.sendRedirect(request.getContextPath()+"/sort.jsp?l="+request.getParameter("l")+"&Num="+next);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		if(email.length() != 0){
-			DBHelper.update("update user set email = '"+email+"' where id = "+request.getParameter("id"));
-		}
-		if(tel.length() != 0){
-			DBHelper.update("update user set teltphone = '"+tel+"' where id = "+request.getParameter("id"));
-		}
-
-		response.sendRedirect(request.getContextPath()+"/user.jsp");
-
 	}
 
 	/**
@@ -79,7 +75,19 @@ public class SaveInfoServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		doGet(request, response);
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
+		out.println("<HTML>");
+		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
+		out.println("  <BODY>");
+		out.print("    This is ");
+		out.print(this.getClass());
+		out.println(", using the POST method");
+		out.println("  </BODY>");
+		out.println("</HTML>");
+		out.flush();
+		out.close();
 	}
 
 	/**

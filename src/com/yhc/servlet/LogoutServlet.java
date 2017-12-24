@@ -9,6 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/** 
+ * @ClassName:     LogoutServlet 
+ * @Description:TODO(注销账号，销毁session，cookie) 
+ * @author:    zhou-jx
+ * @date:        2017年12月24日 上午8:40:50 
+ *  
+ */
 public class LogoutServlet extends HttpServlet {
 
 
@@ -18,8 +25,7 @@ public class LogoutServlet extends HttpServlet {
 
 
 	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
+		super.destroy(); 
 	}
 
 
