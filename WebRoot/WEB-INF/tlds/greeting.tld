@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib version="2.0">
+	<tlib-version>1.0</tlib-version>
+	<short-name>simple</short-name>	
+	<short-name>triangle</short-name>	
+	<tag>	
+		<name>greetingAtt</name>
+		<tag-class>com.yhc.utils.GreetingAttributeTagHandler</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>name</name>
+			<required>true</required><!-- 是否必须出现的属性 -->
+			<rtexprvalue>true</rtexprvalue> <!-- 是否运行时传参 -->
+		</attribute>
+	</tag>	
+	
+</taglib>

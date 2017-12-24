@@ -1,3 +1,16 @@
+<%@page import="javax.persistence.Parameter"%>
+<%@page import="com.yhc.DAO.*"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.util.*" %>
+<%@page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib uri="/CustomTags" prefix="simple"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,40 +39,40 @@ div.main-order{ line-height:30px; padding:10px 0 0 0;}
 <table width="99%" border="0" cellspacing="0" cellpadding="0" id="main">
   <tr>
     <td colspan="2" align="left" valign="top">
-    <span class="time"><strong>上午好！admin</strong><u>[超级管理员]</u></span>
-    <div class="top"><span class="left">您上次的登灵时间：2012-05-03  12:00   登录IP：127.0.0.1 &nbsp;&nbsp;&nbsp;&nbsp;如非您本人操作，请及时</span><a href="index.html" target="mainFrame" onFocus="this.blur()">更改密码</a></div>
-    <div class="sec">这是您第<span class="num">80</span>次,登录！</div>
+    <h1>
+    <%request.setCharacterEncoding("utf-8");
+			String username=request.getSession().getAttribute("adminName").toString();%>
+		<font size="4" color="blue"> 
+		<simple:greetingAtt name="<%=username%>" />
+		<div id="clock" ></div>
+    </h1>
     </td>
   </tr>
-  <tr>
-    <td align="left" valign="top" width="50%">
-    <div class="main-tit">网站信息</div>
-    <div class="main-con">
-    会员注册：开启<br/>
-会员投稿：开启<br/>
-管理员个数：<font color="#538ec6"><strong>6</strong></font> 人<br/>
-登陆者IP：192.168.1.156<br/>
-程序编码：UTF-8<br/>
-    </div>
-    </td>
-    <td align="left" valign="top" width="49%">
-    <div class="main-tit">服务器信息</div>
-    <div class="main-con">
-服务器软件：Apache/2.2.6 (Win32) PHP/5.2.5<br/>
-PHP版本：5.2.5<br/>
-MYSQL版本：5.0.45-community-nt<br/>
-魔术引用：开启 (建议开启)<br/>
-使用域名：192.168.1.124 <br/>
-    </div>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" align="left" valign="top">
-    <div class="main-corpy">系统提示</div>
-    <div class="main-order">1=>如您在使用过程有发现出错请及时与我们取得联系；为保证您得到我们的后续服务，强烈建议您购买我们的正版系统或向我们定制系统！<br/>
-2=>强烈建议您将IE7以上版本或其他的浏览器</div>
-    </td>
-  </tr>
+  
 </table>
+
+<script type="text/javascript">
+function display(clock){
+    var now=new Date();   //创建Date对象
+    var year=now.getFullYear(); //获取年份
+    var month=now.getMonth(); //获取月份
+    var date=now.getDate();  //获取日期
+    var day=now.getDay();  //获取星期
+    var hour=now.getHours(); //获取小时
+    var minu=now.getMinutes(); //获取分钟
+    var sec=now.getSeconds(); //获取秒钟
+    month=month+1;
+    var arr_week=new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+    var week=arr_week[day];  //获取中文的星期
+    var time=year+"年"+month+"月"+date+"日 "+week+" "+hour+":"+minu+":"+sec; //组合系统时间
+    clock.innerHTML="当前时间："+time; //显示系统时间
+}
+window.onload=function(){
+    window.setInterval("display(clock)", 1000);
+}
+</script>
+
+
+
 </body>
 </html>
